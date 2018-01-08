@@ -19,9 +19,7 @@ class WikipediaSpider(scrapy.Spider):
             yield scrapy.Request(url='https://ja.wikipedia.org'+link.xpath('./@href').extract_first(),
                 meta={'link_text': link.xpath('./text()').extract_first()},
                 callback=self.parse_city)
-        # file = codecs.open('database.txt', 'a',"utf-8")        #Open the text file called database.txt
-        # file.write('https://ja.wikipedia.org'+i + "\n")      #write the introduction of that page
-        # file.close()
+
     def parse_city(self, response):
         description="".join(response.xpath('//div[@id="mw-content-text"]/div/p//text()').extract())
         yield {
